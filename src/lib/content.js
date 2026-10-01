@@ -30,14 +30,17 @@ export const schedule = [
 	// Add more nights here as { day, time, venue, neighborhood, address, host }
 ];
 
-// How a night runs. Keep to ~6 for the grid.
+// How a night runs: 9 rounds. The last one is highlighted on the page.
 export const rounds = [
-	{ n: '01', name: 'The Weigh-In', body: 'General knowledge warm-up. Ten questions to see who showed up hungry.' },
-	{ n: '02', name: 'Picture Round', body: 'Faces, logos, album covers. Pass the sheet, squint hard.' },
-	{ n: '03', name: 'Music City', body: 'We play it, you name it. Nashville teams get no mercy here.' },
-	{ n: '04', name: 'Wager Round', body: 'Bet your points on what you know. Big swings, bigger collapses.' },
-	{ n: '05', name: 'Lightning', body: 'Rapid fire. No phones, no lifelines, no excuses.' },
-	{ n: '06', name: 'The Final Bell', body: 'One question. Wager it all. Belt goes home with the last team standing.' }
+	{ n: '01', name: 'General Trivia', body: 'A little bit of everything to get the brains warmed up.' },
+	{ n: '02', name: 'Superlatives', body: 'The most, the fastest, the slowest, the tallest, the shortest. You know, a superlative.' },
+	{ n: '03', name: 'Line ’Em Up', body: 'Three nouns, you put them in order. Cities by population, lowest to highest: Nashville, Atlanta, New York.' },
+	{ n: '04', name: 'Pop Culture', body: 'Movies, music, TV and whatever the internet is yelling about this week.' },
+	{ n: '05', name: 'Celebrity Who Am I?', body: 'Three hints, each one easier than the last. Once you turn in an answer, no second guesses.' },
+	{ n: '06', name: 'General Trivia', body: 'Back to a little bit of everything. Halfway home.' },
+	{ n: '07', name: 'Three to One', body: 'Three prompts, one thing in common. Name the state by its cities: Nashville, Knoxville, Memphis.' },
+	{ n: '08', name: 'Other Than This', body: 'Round seven flipped. We give you one example, you name three more. Other than Nashville, name three Tennessee cities.' },
+	{ n: '09', name: 'Final Trivia', body: 'Hear the category, then bet up to half your points. Belt goes home with the last team standing.' }
 ];
 
 // House rules ("the rules of engagement").

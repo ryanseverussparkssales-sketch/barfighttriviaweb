@@ -161,8 +161,8 @@
 		<div class="wrap">
 			<p class="eyebrow">How a night goes down</p>
 			<div class="head-row">
-				<h2>Six rounds.<br /><em>No mercy.</em></h2>
-				<p class="lede">About two hours start to finish. Scores read out between rounds so you always know who to trash-talk.</p>
+				<h2>Nine rounds.<br /><em>No mercy.</em></h2>
+				<p class="lede">Nine rounds, one champ. Scores read out between rounds so you always know who to trash-talk.</p>
 			</div>
 			<ol class="round-grid">
 				{#each rounds as r}
