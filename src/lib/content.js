@@ -14,7 +14,7 @@ export const site = {
 	phone: '', // TODO optional, e.g. '(615) 555-0100'
 	instagram: 'https://www.instagram.com/barfight_trivia/',
 	facebook: '', // TODO optional
-	url: 'https://barfighttrivia.com' // TODO real domain
+	url: 'https://www.barfighttrivia.com'
 };
 
 // The weekly fight card. Day order controls display order.
