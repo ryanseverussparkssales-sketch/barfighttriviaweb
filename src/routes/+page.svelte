@@ -22,7 +22,7 @@
 	});
 	let nextLabel = $derived(today && next?.day === today ? 'Tonight' : `Next up · ${FULL[next?.day] ?? ''}`);
 
-	const ticker = ['Free to play', 'Teams of up to 6', 'Phones down', 'Belt on the line', 'Heckling encouraged', 'Bar tabs to the winners'];
+	const ticker = ['Free to play', 'Teams of up to 6', 'Phones down', 'Belt on the line', 'Heckling encouraged', 'Brains. Beers. Bragging rights.'];
 
 	// Booking form → opens the visitor's email app with everything filled in. No backend needed.
 	let form = $state({ name: '', email: '', kind: 'Weekly trivia at my bar', venue: '', date: '', size: '', notes: '' });
@@ -68,7 +68,7 @@
 <header class="nav">
 	<div class="wrap nav-in">
 		<a href="#top" class="mark" aria-label="{site.name} home">
-			<span class="mark-bf">BF</span>
+			<img class="mark-logo" src="/logo.png" alt="" width="46" height="46" />
 			<span class="mark-name">Bar Fight<br />Trivia</span>
 		</a>
 		<nav class:open={menuOpen} aria-label="Main">
@@ -86,28 +86,31 @@
 <main id="main">
 	<!-- ───────── HERO / POSTER ───────── -->
 	<section class="hero" id="top">
-		<div class="spot" aria-hidden="true"></div>
 		<div class="wrap hero-in">
-			<p class="eyebrow">{site.city}, Tennessee · Weekly pub trivia</p>
-			<h1 class="poster">
-				<span class="l1">Bar</span>
-				<span class="l2">Fight</span>
-				<span class="l3">Trivia</span>
-			</h1>
-			<p class="tag">{site.tagline}</p>
-			<p class="pitch">{site.pitch}</p>
-			<div class="ctas">
-				<a href="#card" class="btn primary">Find a fight</a>
-				<a href="#book" class="btn">Bring it to your bar</a>
+			<div class="hero-copy">
+				<p class="eyebrow">{site.city}, Tennessee · Weekly pub trivia</p>
+				<h1 class="triad">
+					<span class="w1">Brains.</span>
+					<span class="w2">Beers.</span>
+					<span class="w3">Bragging rights.</span>
+				</h1>
+				<p class="pitch">{site.pitch}</p>
+				<div class="ctas">
+					<a href="#card" class="btn dark">Find a fight</a>
+					<a href="#book" class="btn">Bring it to your bar</a>
+				</div>
 			</div>
 
-			{#if next}
-				<a class="bout" href="#card">
-					<span class="bout-k">{nextLabel}</span>
-					<span class="bout-v">{next.venue}</span>
-					<span class="bout-s">{next.time} · {next.neighborhood}</span>
-				</a>
-			{/if}
+			<div class="hero-badge">
+				<img src="/logo.png" alt="Bar Fight Trivia logo: a mustachioed bare-knuckle boxer" width="600" height="600" />
+				{#if next}
+					<a class="bout" href="#card">
+						<span class="bout-k">{nextLabel}</span>
+						<span class="bout-v">{next.venue}</span>
+						<span class="bout-s">{next.time} · {next.neighborhood}</span>
+					</a>
+				{/if}
+			</div>
 		</div>
 
 		<div class="ticker" aria-hidden="true">
@@ -311,11 +314,7 @@
 	}
 	.nav-in { display: flex; align-items: center; justify-content: space-between; height: 70px; }
 	.mark { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-	.mark-bf {
-		font-family: var(--display); font-size: 22px; width: 44px; height: 44px;
-		display: grid; place-items: center; background: var(--blood); color: #fff;
-		transform: rotate(-4deg);
-	}
+	.mark-logo { width: 46px; height: 46px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 2px var(--gold); }
 	.mark-name { font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 14px; line-height: 1.05; }
 	nav { display: flex; align-items: center; gap: 28px; }
 	nav a:not(.btn) {
@@ -340,70 +339,71 @@
 	}
 
 	/* ── hero ── */
-	.hero { min-height: calc(100svh - 70px); display: flex; flex-direction: column; overflow: hidden; }
-	.hero-in { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-top: 48px; padding-bottom: 56px; position: relative; z-index: 2; width: 100%; }
-	.spot {
-		position: absolute; right: -18vw; top: -10vh; width: 80vw; height: 80vw; max-width: 1000px; max-height: 1000px;
-		border-radius: 50%;
-		background: radial-gradient(circle, rgba(232, 197, 71, 0.18) 1.4px, transparent 1.6px) 0 0 / 12px 12px;
-		mask-image: radial-gradient(circle, #000 20%, transparent 68%);
+	.hero { background: var(--blood); color: var(--ink); overflow: hidden; }
+	.hero::before {
+		content: ''; position: absolute; inset: 0; pointer-events: none;
+		background: radial-gradient(circle, rgba(18, 17, 16, 0.14) 1.3px, transparent 1.5px) 0 0 / 10px 10px;
+		mask-image: linear-gradient(100deg, transparent 35%, #000 95%);
 	}
-	.poster { display: flex; flex-direction: column; margin: 6px 0 22px; }
-	.poster span { display: block; }
-	.l1 { font-size: clamp(64px, 13vw, 168px); color: var(--bone); }
-	.l2 {
-		font-size: clamp(110px, 25vw, 330px); color: var(--gold); line-height: 0.82;
-		text-shadow: 6px 6px 0 var(--ink), 9px 9px 0 var(--blood);
-		margin-left: -0.04em;
+	.hero-in {
+		position: relative; z-index: 2; min-height: calc(100svh - 70px - 52px);
+		display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center;
+		padding-top: 56px; padding-bottom: 64px;
 	}
-	.l3 {
-		position: relative; align-self: flex-start;
-		font-size: clamp(52px, 10.5vw, 136px);
-		-webkit-text-stroke: 2px var(--bone); color: transparent; margin-top: 10px;
+	.hero .eyebrow { color: var(--ink); }
+	.hero .eyebrow::before { background: var(--gold); }
+	.triad { display: flex; flex-direction: column; text-transform: none; margin: 4px 0 24px; line-height: 1; }
+	.w1 { font-family: var(--script); font-size: clamp(64px, 9vw, 120px); color: var(--ink); line-height: 0.9; transform: rotate(-4deg); transform-origin: left; }
+	.w2 {
+		font-size: clamp(60px, 8.4vw, 112px); color: var(--gold); text-transform: uppercase;
+		-webkit-text-stroke: 2px var(--ink); paint-order: stroke fill; text-shadow: 5px 5px 0 var(--ink);
 	}
-	/* red slash band running edge to edge behind TRIVIA */
-	.l3::before {
-		content: ''; position: absolute; z-index: -1; left: -100vw; right: -100vw; top: 8%; bottom: 2%;
-		background: var(--blood); transform: rotate(-3deg);
-		box-shadow: 0 0 0 5px var(--ink), 0 0 0 8px var(--gold);
-	}
-	.poster { isolation: isolate; }
-	.tag { font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; font-size: clamp(22px, 3vw, 30px); margin: 0 0 10px; }
-	.pitch { max-width: 520px; color: var(--bone-dim); margin: 0 0 28px; }
+	.w3 { font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; font-size: clamp(32px, 4.4vw, 58px); color: var(--bone); margin-top: 6px; }
+	.pitch { max-width: 480px; color: rgba(18, 17, 16, 0.86); font-weight: 500; font-size: 18px; margin: 0 0 28px; }
 	.ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+	.hero .btn { border-color: var(--ink); color: var(--ink); }
+	.hero .btn:hover { box-shadow: 4px 4px 0 var(--gold); }
+	.hero .btn.dark { background: var(--ink); color: var(--bone); }
 
+	.hero-badge { position: relative; justify-self: center; width: min(100%, 440px); }
+	.hero-badge img {
+		width: 100%; height: auto; border-radius: 50%; background: #fff;
+		box-shadow: 0 0 0 10px var(--ink), 0 0 0 16px var(--gold), 18px 22px 0 16px rgba(18, 17, 16, 0.35);
+		transform: rotate(-4deg);
+	}
 	.bout {
-		position: absolute; right: var(--pad); bottom: 64px; z-index: 3;
+		position: relative; z-index: 3; margin: 34px 0 0 auto; width: fit-content;
 		display: flex; flex-direction: column; gap: 2px; text-decoration: none;
-		background: var(--bone); color: var(--ink); padding: 18px 22px 16px;
-		transform: rotate(3deg); box-shadow: 8px 8px 0 var(--ink-3); min-width: 230px;
-		border: 2px dashed var(--ink);
-		transition: transform 0.2s;
+		background: var(--bone); color: var(--ink); padding: 16px 20px 14px;
+		transform: rotate(3deg); box-shadow: 7px 7px 0 var(--ink); border: 2px dashed var(--ink);
+		transition: transform 0.2s; max-width: 300px;
 	}
 	.bout:hover { transform: rotate(0deg) translateY(-4px); }
 	.bout-k { font-family: var(--label); font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; font-size: 13px; color: var(--blood-deep); }
-	.bout-v { font-family: var(--display); font-size: 30px; text-transform: uppercase; line-height: 1.05; }
+	.bout-v { font-family: var(--display); font-size: 21px; text-transform: uppercase; line-height: 1.1; }
 	.bout-s { font-family: var(--label); font-weight: 600; font-size: 16px; letter-spacing: 0.06em; text-transform: uppercase; }
 
 	@media (max-width: 900px) {
-		.bout { position: static; align-self: flex-start; margin-top: 36px; transform: rotate(-2deg); }
+		.hero-in { grid-template-columns: 1fr; min-height: 0; padding-top: 40px; }
+		.hero-badge { width: min(78%, 340px); margin: 8px auto 40px; }
+		.bout { margin: 30px auto 0; }
 	}
 
 	.ticker { position: relative; z-index: 2; background: var(--gold); color: var(--ink); overflow: hidden; border-top: 3px solid var(--ink); }
 	.ticker-track { display: flex; width: max-content; animation: tick 34s linear infinite; padding: 12px 0; }
-	.ticker span, .ticker i { font-family: var(--display); font-size: 22px; text-transform: uppercase; padding: 0 18px; font-style: normal; white-space: nowrap; }
+	.ticker span, .ticker i { font-family: var(--display); font-size: 17px; text-transform: uppercase; padding: 0 18px; font-style: normal; white-space: nowrap; }
 	.ticker i { color: var(--blood); }
 	@keyframes tick { to { transform: translateX(-50%); } }
 
 	/* ── shared section heads ── */
-	.head-row { display: grid; grid-template-columns: 1.1fr 1fr; gap: 32px; align-items: end; margin-bottom: 52px; }
-	h2 { font-size: clamp(54px, 8.5vw, 104px); }
+	.head-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; align-items: end; margin-bottom: 52px; }
+	h2 { font-size: clamp(40px, 6vw, 76px); }
 	.lede { color: var(--bone-dim); max-width: 440px; margin: 0; font-size: 18px; }
 	@media (max-width: 820px) { .head-row { grid-template-columns: 1fr; gap: 18px; margin-bottom: 36px; } }
 
 	/* ── fight card ── */
 	.card { background: var(--ink-2); }
-	.stubs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; }
+	.stubs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 400px)); gap: 22px; }
 	.stub {
 		display: grid; grid-template-columns: 104px 1fr; background: var(--bone); color: var(--ink);
 		position: relative; transition: transform 0.2s;
@@ -414,10 +414,10 @@
 		border-right: 3px dashed var(--ink-2); padding: 18px 8px;
 	}
 	.stub.live .stub-day { background: var(--blood); }
-	.d { font-family: var(--display); font-size: 46px; text-transform: uppercase; line-height: 1; }
+	.d { font-family: var(--display); font-size: 28px; text-transform: uppercase; line-height: 1; }
 	.t { font-family: var(--label); font-weight: 700; letter-spacing: 0.08em; font-size: 16px; margin-top: 4px; }
 	.stub-body { padding: 22px 22px 20px; }
-	.stub h3 { font-size: 32px; margin-bottom: 4px; }
+	.stub h3 { font-size: 24px; margin-bottom: 4px; }
 	.hood { font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 14px; color: var(--blood-deep); margin: 0 0 12px; }
 	.addr { margin: 0 0 10px; font-size: 15px; }
 	.addr a { text-decoration-color: rgba(18, 17, 16, 0.3); text-underline-offset: 3px; }
@@ -428,7 +428,7 @@
 		font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.2em; font-size: 13px; padding: 4px 10px;
 		transform: rotate(3deg);
 	}
-	@media (max-width: 420px) { .stub { grid-template-columns: 84px 1fr; } .d { font-size: 38px; } }
+	@media (max-width: 420px) { .stub { grid-template-columns: 84px 1fr; } .d { font-size: 24px; } }
 
 	/* ── rounds ── */
 	.round-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
@@ -438,7 +438,7 @@
 	.round-grid li:last-child .rd { color: var(--gold); }
 	.round-grid li:last-child p { color: rgba(255, 255, 255, 0.85); }
 	.rd { font-family: var(--label); font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; font-size: 14px; color: var(--blood); }
-	.round-grid h3 { font-size: 34px; margin: 10px 0 10px; }
+	.round-grid h3 { font-size: 24px; margin: 10px 0 10px; }
 	.round-grid p { margin: 0; color: var(--bone-dim); }
 	@media (max-width: 900px) { .round-grid { grid-template-columns: 1fr 1fr; } }
 	@media (max-width: 560px) { .round-grid { grid-template-columns: 1fr; } }
@@ -455,8 +455,8 @@
 	.belt li { display: grid; grid-template-columns: 76px 1fr; column-gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(232, 197, 71, 0.25); }
 	.belt li:last-child { border-bottom: 0; }
 	.rank { grid-row: span 2; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 14px; color: var(--gold); align-self: center; }
-	.team { font-family: var(--display); font-size: 28px; text-transform: uppercase; line-height: 1.05; }
-	.belt li.top .team { font-size: 40px; color: var(--gold); }
+	.team { font-family: var(--display); font-size: 22px; text-transform: uppercase; line-height: 1.05; }
+	.belt li.top .team { font-size: 30px; color: var(--gold); }
 	.meta { font-size: 14px; color: var(--bone-dim); }
 	.fine { color: var(--bone-dim); font-size: 15px; margin-top: 16px; }
 	@media (max-width: 900px) { .split-in { grid-template-columns: 1fr; } }
@@ -514,7 +514,7 @@
 	/* ── footer ── */
 	.foot { border-top: 1px solid var(--line); padding: 48px 0 40px; }
 	.foot-in { display: grid; grid-template-columns: auto 1fr; gap: 20px 40px; align-items: center; }
-	.foot-mark { font-family: var(--display); font-size: 40px; text-transform: uppercase; line-height: 0.9; color: var(--gold); }
+	.foot-mark { font-family: var(--display); font-size: 28px; text-transform: uppercase; line-height: 0.9; color: var(--gold); }
 	.foot-links { display: flex; flex-wrap: wrap; gap: 10px 28px; justify-content: flex-end; }
 	.foot-links a { font-family: var(--label); font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; text-decoration: none; color: var(--bone-dim); }
 	.foot-links a:hover { color: var(--bone); }

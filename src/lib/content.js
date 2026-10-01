@@ -7,12 +7,12 @@
 export const site = {
 	name: 'Bar Fight Trivia',
 	city: 'Nashville',
-	tagline: 'Pub trivia with the gloves off.',
+	tagline: 'Brains, beers & bragging rights.',
 	pitch:
-		'Six rounds. One mic. Every team in the bar swinging for the belt. Free to play, bragging rights guaranteed, bar tabs on the line.',
-	email: 'bookings@barfighttrivia.com', // TODO real inbox
+		'Weekly trivia at your favorite Nashville bars. Grab your crew, put your phones away, and swing for the belt.',
+	email: 'Barfighttrivia@gmail.com',
 	phone: '', // TODO optional, e.g. '(615) 555-0100'
-	instagram: 'https://instagram.com/barfighttrivia', // TODO confirm handle
+	instagram: 'https://www.instagram.com/barfight_trivia/',
 	facebook: '', // TODO optional
 	url: 'https://barfighttrivia.com' // TODO real domain
 };
@@ -20,29 +20,14 @@ export const site = {
 // The weekly fight card. Day order controls display order.
 export const schedule = [
 	{
-		day: 'Tue',
+		day: 'Thu', // TODO confirm night (the Mar 12 "tonight" post was a Thursday)
 		time: '7:00 PM',
-		venue: 'Venue Name', // TODO
-		neighborhood: 'East Nashville', // TODO
-		address: '123 Example St, Nashville, TN', // TODO
-		host: 'Host Name' // TODO
-	},
-	{
-		day: 'Wed',
-		time: '7:30 PM',
-		venue: 'Venue Name', // TODO
-		neighborhood: 'The Nations', // TODO
-		address: '456 Example Ave, Nashville, TN', // TODO
-		host: 'Host Name' // TODO
-	},
-	{
-		day: 'Thu',
-		time: '8:00 PM',
-		venue: 'Venue Name', // TODO
-		neighborhood: 'Germantown', // TODO
-		address: '789 Example Blvd, Nashville, TN', // TODO
+		venue: 'The Back Bar at Verna',
+		neighborhood: 'East Nashville',
+		address: 'Verna, East Nashville, TN', // TODO street address
 		host: 'Host Name' // TODO
 	}
+	// Add more nights here as { day, time, venue, neighborhood, address, host }
 ];
 
 // How a night runs. Keep to ~6 for the grid.
@@ -58,10 +43,10 @@ export const rounds = [
 // House rules ("the rules of engagement").
 export const rules = [
 	'Teams of up to 6. Show up solo and we’ll find you a corner.',
-	'Free to play. Always.',
+	'Free to play. Always.', // TODO confirm
 	'Phones down during rounds. Get caught, get disqualified.',
 	'Host’s call is final. Heckling is encouraged. Throwing hands is not.',
-	'Top teams take home bar tabs and the title.' // TODO confirm prizes
+	'Prizes for the top teams. New ones announced at the mic.' // TODO confirm prizes
 ];
 
 // Current titleholders — swap out weekly or remove the section.
