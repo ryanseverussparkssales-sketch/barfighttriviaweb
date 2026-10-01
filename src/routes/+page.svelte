@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { site, schedule, rounds, rules, champs, faqs } from '#lib/content.js';
+	import { site, schedule, rounds, rules, faqs } from '#lib/content.js';
 
 	const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	const FULL = { Sun: 'Sunday', Mon: 'Monday', Tue: 'Tuesday', Wed: 'Wednesday', Thu: 'Thursday', Fri: 'Friday', Sat: 'Saturday' };
@@ -48,7 +48,7 @@
 	const nav = [
 		['#card', 'Fight card'],
 		['#rounds', 'How it works'],
-		['#champs', 'Champs'],
+		['#rules', 'Rules'],
 		['#faq', 'FAQ']
 	];
 </script>
@@ -176,35 +176,18 @@
 		</div>
 	</section>
 
-	<!-- ───────── RULES + CHAMPS ───────── -->
-	<section class="section split" id="champs">
+	<!-- ───────── RULES ───────── -->
+	<section class="section split" id="rules">
 		<div class="wrap split-in">
-			<div class="rules">
+			<div>
 				<p class="eyebrow">Rules of engagement</p>
 				<h2>Fight<br /><em>fair.</em></h2>
-				<ol>
-					{#each rules as r, i}
-						<li><span>{String(i + 1).padStart(2, '0')}</span>{r}</li>
-					{/each}
-				</ol>
 			</div>
-
-			<div class="belt">
-				<p class="eyebrow">Current belt holders</p>
-				<div class="belt-plate">
-					<div class="belt-strap" aria-hidden="true"></div>
-					<ul>
-						{#each champs as c, i}
-							<li class:top={i === 0}>
-								<span class="rank">{i === 0 ? 'Champ' : `#${i + 1}`}</span>
-								<span class="team">{c.team}</span>
-								<span class="meta">{c.venue} · {c.streak}-week streak</span>
-							</li>
-						{/each}
-					</ul>
-				</div>
-				<p class="fine">Updated weekly. Think you can take the belt? Prove it.</p>
-			</div>
+			<ol class="rules">
+				{#each rules as r, i}
+					<li><span>{String(i + 1).padStart(2, '0')}</span>{r}</li>
+				{/each}
+			</ol>
 		</div>
 	</section>
 
@@ -443,22 +426,13 @@
 	@media (max-width: 900px) { .round-grid { grid-template-columns: 1fr 1fr; } }
 	@media (max-width: 560px) { .round-grid { grid-template-columns: 1fr; } }
 
-	/* ── rules + champs ── */
+	/* ── rules ── */
 	.split { background: var(--ink-2); }
-	.split-in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 7vw, 96px); }
-	.rules ol { list-style: none; padding: 0; margin: 36px 0 0; }
-	.rules li { display: flex; gap: 18px; padding: 16px 0; border-bottom: 1px solid var(--line); font-size: 18px; }
-	.rules li span { font-family: var(--display); color: var(--gold); font-size: 22px; line-height: 1.3; }
-	.belt-plate { position: relative; margin-top: 10px; padding: 34px 26px 26px; background: linear-gradient(160deg, #3a2a10, #1d150a); border: 3px solid var(--gold); box-shadow: inset 0 0 0 6px #1d150a, inset 0 0 0 8px rgba(232, 197, 71, 0.5); }
-	.belt-strap { position: absolute; left: -2px; right: -2px; top: 50%; height: 60%; transform: translateY(-50%); background: repeating-linear-gradient(90deg, rgba(232, 197, 71, 0.06) 0 2px, transparent 2px 14px); pointer-events: none; }
-	.belt ul { list-style: none; margin: 0; padding: 0; position: relative; }
-	.belt li { display: grid; grid-template-columns: 76px 1fr; column-gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(232, 197, 71, 0.25); }
-	.belt li:last-child { border-bottom: 0; }
-	.rank { grid-row: span 2; font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; font-size: 14px; color: var(--gold); align-self: center; }
-	.team { font-family: var(--display); font-size: 22px; text-transform: uppercase; line-height: 1.05; }
-	.belt li.top .team { font-size: 30px; color: var(--gold); }
-	.meta { font-size: 14px; color: var(--bone-dim); }
-	.fine { color: var(--bone-dim); font-size: 15px; margin-top: 16px; }
+	.split-in { display: grid; grid-template-columns: 1fr 1.3fr; gap: clamp(32px, 6vw, 80px); align-items: start; }
+	.rules { list-style: none; padding: 0; margin: 0; }
+	.rules li { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 18px; }
+	.rules li:first-child { border-top: 1px solid var(--line); }
+	.rules li span { font-family: var(--display); color: var(--gold); font-size: 22px; line-height: 1.3; min-width: 36px; flex-shrink: 0; }
 	@media (max-width: 900px) { .split-in { grid-template-columns: 1fr; } }
 
 	/* ── faq ── */

@@ -1,6 +1,6 @@
 // ─────────────────────────────────────────────────────────────
 //  BAR FIGHT TRIVIA — all site copy and data lives here.
-//  Edit this file to update venues, nights, champs, contact.
+//  Edit this file to update venues, nights, rounds, rules, contact.
 //  Anything marked  // TODO  is a placeholder to replace with real info.
 // ─────────────────────────────────────────────────────────────
 
@@ -52,12 +52,6 @@ export const rules = [
 	'Prizes for the top teams. New ones announced at the mic.' // TODO confirm prizes
 ];
 
-// Current titleholders — swap out weekly or remove the section.
-export const champs = [
-	{ team: 'Team Name', venue: 'Venue Name', streak: 3 }, // TODO
-	{ team: 'Team Name', venue: 'Venue Name', streak: 2 }, // TODO
-	{ team: 'Team Name', venue: 'Venue Name', streak: 1 } // TODO
-];
 
 export const faqs = [
 	{ q: 'Does it cost anything?', a: 'No. Trivia is free. Just order something from the bar and tip your bartender.' },
